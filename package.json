@@ -1,0 +1,25 @@
+{
+  "name": "js-telegram-bot",
+  "version": "1.0.0",
+  "description": "Simple Telegram bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bartman238/Simple-JS-Telegram-bot.git"
+  },
+  "keywords": [
+    "telegraf-bot"
+  ],
+  "author": "Bartmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bartman238/Simple-JS-Telegram-bot/issues"
+  },
+  "homepage": "https://github.com/Bartman238/Simple-JS-Telegram-bot#readme",
+  "dependencies": {
+    "telegraf": "^3.29.0"
+  }
+}
