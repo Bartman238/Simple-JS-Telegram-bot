@@ -13,6 +13,33 @@ bot.telegram.getMe().then((bot_informations) => {
 
 bot.command('Test', (ctx) => ctx.reply('HelloWorld'));
 
-bot.hears('Пошел нахуй', (ctx) => ctx.reply('Нет ты'));
+bot.hears('Тест', (ctx) => ctx.reply('Нет ты'));
+
+bot.hears('Бот, какое аниме?', (ctx)  => {
+    let msgWithPhoto = ctx.message.reply_to_message.photo[2].file_id;
+    console.log("File ID is " + msgWithPhoto);
+    function searchAnime() {
+        
+    }
+
+    ctx.reply("Это аниме", Extra.inReplyTo(ctx.message.reply_to_message.message_id));
+    
+});
+
+bot.command('roulette', (ctx) => {
+    let randomNumber = getRandomNumber(0, 10);
+    console.log("Roulette is " + randomNumber);
+    if (randomNumber == 0) {
+        ctx.reply("Бдыщ! Ты убит [" + randomNumber + "]", Extra.inReplyTo(ctx.message.message_id));
+        bot.telegram.kickChatMember(ctx.message.chat.id, ctx.message.from.id);
+        console.log(ctx.message.from.username + " has kicked")
+    } else {
+        ctx.reply("Щелк... Тебе повезло [" + randomNumber + "]", Extra.inReplyTo(ctx.message.message_id));
+    }
+});
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
 bot.startPolling();
