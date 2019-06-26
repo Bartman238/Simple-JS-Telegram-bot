@@ -31,9 +31,17 @@ bot.command('roulette', (ctx) => {
     let randomNumber = getRandomNumber(0, 5);
     console.log(ctx.message.from.username + "'s roulette is " + randomNumber);
     if (randomNumber == 0) {
-        ctx.reply("Бдыщ! Тебе прострелили руку, и теперь ты не можешь использовать стикосы. (%%тест: примерно 60 сек) [" + randomNumber + "]", Extra.inReplyTo(ctx.message.message_id));
+        ctx.reply("Бдыщ! Тебе прострелили руку, и теперь ты не можешь использовать стикосы. [" + randomNumber + "]", Extra.inReplyTo(ctx.message.message_id));
         //bot.telegram.kickChatMember(ctx.message.chat.id, ctx.message.from.id);
-        bot.telegram.restrictChatMember(ctx.message.chat.id, ctx.message.from.id, 60, true, true, false, false)
+        let correctResstrictDate = (Date.now() + 40000)/1000;
+        let params = {
+            until_date: correctResstrictDate,
+            can_send_messages: true,
+            can_send_media_messages: true,
+            can_send_other_messages: false,
+            can_add_web_page_previews: false
+        };
+        bot.telegram.restrictChatMember(ctx.message.chat.id, ctx.message.from.id, params);
         console.log(ctx.message.from.username + " has kicked " + "from " + ctx.message.chat.title);
     } else {
         ctx.reply("Щелк... Тебе повезло. [" + randomNumber + "]", Extra.inReplyTo(ctx.message.message_id));
