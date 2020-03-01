@@ -20,8 +20,11 @@
   },
   "homepage": "https://github.com/Bartman238/Simple-JS-Telegram-bot#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "image-downloader": "^3.5.0",
     "node-base64-image": "^1.0.7",
-    "telegraf": "^3.29.0"
+    "telegraf": "^3.36.0",
+    "telegraf-inline-menu": "^4.0.0",
+    "telegraf-keyboard": "^1.1.2"
   }
 }
