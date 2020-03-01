@@ -105,12 +105,16 @@ bot.command('mute', ctx => {
         bot.on('callback_query', callbackCtx => {
             let clickByUser = callbackCtx.callbackQuery.from.id;
             if (!votedUsers.includes(clickByUser)) {
+                let voteIsDone = false;
                 votes++;
                 votedUsers.splice(-1, 0, clickByUser)
                 let newMessage = {inline_keyboard: [[{text: `На вилы! (${votes}/5)`, callback_data: 'muteVote'}]]};
                 let message = callbackCtx.callbackQuery.message;
                 console.log(callbackCtx.callbackQuery.from)
                 callbackCtx.telegram.editMessageReplyMarkup(message.chat.id, message.message_id, `muteVote`, newMessage);
+                setTimeout(() => {
+                    voteIsDone = true;
+                }, 120000);
 
                 if ( votes >= 5 ) {
                     callbackCtx.telegram.editMessageText(message.chat.id, message.message_id, `muteVote`, `Вы линчевали \n ${userVotedFor.first_name}!`);
@@ -127,6 +131,10 @@ bot.command('mute', ctx => {
                     bot.telegram.restrictChatMember(message.chat.id, ctx.message.reply_to_message.from.id, params);
 
                     ctx.telegram.sendSticker(message.chat.id, 'CAACAgIAAxkBAAKq8F5bsnS7RfiSP8XbCvrFgtDvr-SUAALmAgACmDw7AZp3Bnb-M6ybGAQ')
+                } else if ( votes < 5 &&  voteIsDone === true) {
+                    callbackCtx.telegram.editMessageText(message.chat.id, message.message_id, `muteVote`, `Вы пощадили \n ${userVotedFor.first_name}! \n Ну и хуй с ним`);
+                    votes = 0;
+                    votedUsers = [];
                 }
             }
         })
