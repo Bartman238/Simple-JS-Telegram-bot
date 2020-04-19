@@ -30,7 +30,9 @@ bot.hears('Тест', (ctx) => {
 
 bot.command('Test', (ctx) => ctx.reply('HelloWorld'));
 
-bot.hears('че за аниме?', (ctx)  => {
+let askingForAnime = new RegExp(/(([Чч][еёоОЕЁ]|[Чч]то|[ЩщШш]о)\sза\s[оаОА]н[яие]м[уеэ])/);
+
+bot.hears(askingForAnime, (ctx)  => {
 
     let fileId = ctx.message.reply_to_message.photo;
 

@@ -1,0 +1,12 @@
+node_modules/
+/temp/img/*.jpg
+npm-debug.log*
+temp/
+
+.env
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
